@@ -4,3 +4,6 @@
 -Ao término da stamina cair.
 -No chão recarregar stamina.
 -Implementar colisão.
+    --colisão deve ter um mapa global de processamento rápido
+    --objetos devem ser capazes de colidir por esse mapa e não uns com os outros
+    
