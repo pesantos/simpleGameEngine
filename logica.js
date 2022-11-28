@@ -54,6 +54,10 @@ class Jogador{
         return true;
     }
 
+    colisao(){
+        
+    }
+
     bloqueado(lado){
         if(this.posicao.x<=0 && lado=='esquerda'){
             this.posicao.x = 0;
