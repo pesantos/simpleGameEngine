@@ -1,8 +1,8 @@
--Aceleração ao andar
+
 -Grudar na parede ao colidir
 -Ao Colidir ter stamina para ficar agarrado
 -permitir movimentação acima e abaixo quando agarrado.
 -Ao término da stamina cair.
 -No chão recarregar stamina.
--Implementar pulo duplo.
 -Implementar colisão.
+-Implementar um logout grafico

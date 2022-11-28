@@ -5,72 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas Estudo</title>
-    <script src="objetos.js"></script>
+    
 </head>
 <body style="margin: 0px;text-align: center;">
     <canvas id="myCanvas" width="500px" height="500px"
 style="border:1px solid #d71b1b; position: relative;margin-top: 5px;">
 </body>
 
-<script>
-    let canvas = document.getElementById("myCanvas");
-    
-
-
-    window.addEventListener('keydown',(ev)=>{pressionou(ev)});
-    window.addEventListener('keyup',(ev)=>{soltou(ev)});
-
-    let ctx = canvas.getContext("2d");
-    let motor  = null;
-    let objetos = [];
-    // ctx.fillRect()
-
-    objetos.push(new Jogador({
-        x:450,
-        y:0
-    }));
-
-    objetos.push(new Jogador({
-        x:60,
-        y:20
-    }));
-    objetos[0].player1 = true;
-
-    console.log(objetos);
-
-    function desenhar(){
-        branco(); 
-        objetos.forEach(ob=>{ob.atualizar(ctx);});
-    }
-
-    function branco(){
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(0,0,500,500);
-    }
-
-
-
-    motor = setInterval(()=>{
-        desenhar();
-    },1000/60);
-
-
-    function pressionou(ev){
-        // console.log(ev);
-        if(ev.key=='w'){
-            if(objetos[0].noChao()){
-                objetos[0].posicao.y--;      
-                objetos[0].aceleracao.y=-6; 
-            }
-              
-        }
-        if(ev.key=='d')teclas.frente = true;
-        if(ev.key=='a')teclas.tras = true;
-    }
-
-    function soltou(ev){
-        if(ev.key=='d')teclas.frente = false;
-        if(ev.key=='a')teclas.tras = false;
-    }
-</script>
+<script src="logica.js"></script>
 </html>
