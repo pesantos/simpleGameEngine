@@ -6,7 +6,8 @@ let FORCA_DO_PULO = -6;
 let teclas = {};
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
-let motor  = null;
+let motor  = null;// timer para execucao principal
+let logs = null; //timer para mostrar dados
 let objetos = [];
 
 window.addEventListener('keydown',(ev)=>{pressionou(ev)});
@@ -15,6 +16,21 @@ let MAPEAMENTO = {
     frente:'d',
     tras:'a',
     cima:'w'
+}
+let inf = document.getElementById('info');
+
+
+
+
+function logar(){
+    inf.innerHTML = `
+
+        <div>aceleracao: <div class="sub"> ${P1.aceleracao.x.toFixed(2)}</div></div>
+        <div>força do pulo: <div class="sub">${FORCA_DO_PULO}</div></div>
+        <div>Atores no Palco: <div class="sub">${objetos?objetos.length:0}</div></div>
+        <div>STAMINA: <div class="sub">${P1.stamina}</div></div>
+        <div>PULO DUPLO: <div class="sub">${P1.duploPulo}</div></div>
+    `;
 }
 
 class Jogador{
@@ -26,6 +42,7 @@ class Jogador{
         this.altura = 10;
         this.duploPulo = true;
         this.player1 = false;
+        this.stamina = 10;
         this.aceleracao = {
             x:1,
             y:0
@@ -88,7 +105,7 @@ class Jogador{
 
 }
 
-//=========Configuração=====================
+    //=========Configuração=====================
     P1 = new Jogador({x:450,y:0});
     P1.player1 = true;    
     objetos.push(P1);
@@ -99,8 +116,12 @@ class Jogador{
     motor = setInterval(()=>{
         desenhar();
     },1000/60);
+    logs = setInterval(()=>{
+        logar();
+    },200);
 
-//========Ignição==========================
+    //========Ignição==========================
+
 
     function desenhar(){
         branco(); 

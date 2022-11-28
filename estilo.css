@@ -1,0 +1,19 @@
+#info{
+    font-family: 'arial';
+    text-transform:uppercase ;
+    font-size: 0.6em;
+    text-align: right;
+    margin-right: 20%;
+    font-weight: bold;
+    
+}
+
+.sub{
+    display: inline-block;
+    width: 50px;
+    text-align: right;
+    margin-right: 4px;
+    position: relative;
+    color:red;
+}
+
