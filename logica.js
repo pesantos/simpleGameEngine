@@ -109,6 +109,49 @@ class Jogador{
 
 }
 
+let gamepad = new Gamepad();
+
+gamepad.bind(Gamepad.Event.CONNECTED, function(device) {
+    // a new gamepad connected
+    console.log("Controle conectado ",device);
+});
+
+gamepad.bind(Gamepad.Event.BUTTON_DOWN, function(e) {
+    // e.control of gamepad e.gamepad pressed down
+    console.log("pressionou ",e.control);
+    if(e.control=='FACE_1')teclas.tras = true;
+    if(e.control=='FACE_4')teclas.frente = true;
+    if(e.control=='FACE_3')executarPulo();
+});
+
+gamepad.bind(Gamepad.Event.BUTTON_UP, function(e) {
+    // e.control of gamepad e.gamepad released
+    console.log("Soltou ",e.control);
+    if(e.control=='FACE_1')teclas.tras = false;
+    if(e.control=='FACE_4')teclas.frente = false;
+});
+
+gamepad.bind(Gamepad.Event.AXIS_CHANGED, function(e) {
+    // e.axis changed to value e.value for gamepad e.gamepad
+    console.log("Eixo ",e);
+});
+
+if (!gamepad.init()) {
+    console.log("JOystick não suportado");
+}
+ 
+  function apertouPular(){
+    console.log("Apertou Pular");
+  }
+
+  function andouPraEsquerda(){
+    console.log("Andou pra esquerda");
+  }
+
+  
+
+ 
+
     //=========Configuração=====================
     P1 = new Jogador({x:450,y:0});
     P1.player1 = true;    
@@ -118,6 +161,13 @@ class Jogador{
         y:20
     }));
     motor = setInterval(()=>{
+        
+        
+        
+          
+        
+          
+               
         desenhar();
     },1000/60);
     logs = setInterval(()=>{
@@ -137,29 +187,36 @@ class Jogador{
         ctx.fillRect(0,0,LARGURA,ALTURA);
     }
 
-    function pressionou(ev){
-        // console.log(ev);
-        if(ev.key==MAPEAMENTO.cima){
-            if(P1.noChao()){
-                P1.duploPulo = true;
-                P1.posicao.y--;      
-                P1.aceleracao.y=FORCA_DO_PULO; 
-            }else if(P1.duploPulo){
-                P1.duploPulo = false;
-                P1.aceleracao.y=FORCA_DO_PULO; 
-            }
+   function executarPulo(){
+    if(P1.noChao()){
+        P1.duploPulo = true;
+        P1.posicao.y--;      
+        P1.aceleracao.y=FORCA_DO_PULO; 
+    }else if(P1.duploPulo){
+        P1.duploPulo = false;
+        P1.aceleracao.y=FORCA_DO_PULO; 
+    }
+   }
+
+    function pressionou(ev,face){
+        console.log(ev);
+        if((ev && ev.key==MAPEAMENTO.cima)){
+            executarPulo();
               
         }
-        if(ev.key==MAPEAMENTO.frente)teclas.frente = true;
-        if(ev.key==MAPEAMENTO.tras)teclas.tras = true;
+        if((ev && ev.key==MAPEAMENTO.frente) )teclas.frente = true;
+        if((ev && ev.key==MAPEAMENTO.tras) )teclas.tras = true;
     }
 
-    function soltou(ev){
-        if(ev.key==MAPEAMENTO.frente){
+    function soltou(ev,face){
+
+        
+
+        if((ev && ev.key==MAPEAMENTO.frente) ){
             teclas.frente = false;
             P1.aceleracao.x = 1;
         }
-        if(ev.key==MAPEAMENTO.tras){
+        if((ev && ev.key==MAPEAMENTO.tras) ){
             teclas.tras = false;
             P1.aceleracao.x = 1;
         }
